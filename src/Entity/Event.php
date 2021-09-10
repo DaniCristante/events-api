@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\EventRepository;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,28 +16,47 @@ use Doctrine\ORM\Mapping as ORM;
 class Event
 {
     /**
+     * @var int
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
 
-    /** @ORM\Column(type="string", length=255) */
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255) 
+     */
     private $title;
 
-    /** @ORM\Column(type="string", length=300, nullable=true) */
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=300, nullable=true) 
+     */
     private $address;
 
-    /** @ORM\Column(type="string", length=255, nullable=true) */
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true) 
+     */
     private $city;
 
-    /** @ORM\Column(type="datetime", nullable=true) */
+    /**
+     * @var DateTimeInterface
+     * @ORM\Column(type="datetime", nullable=true) 
+     */
     private $datetime;
 
-    /** @ORM\Column(type="integer") */
+    /** 
+     * @var int
+     * @ORM\Column(type="integer") 
+     */
     private $maxEntries;
 
-    /** @ORM\Column(type="integer", nullable=true) */
+    /**
+     * @var int
+     * @ORM\Column(type="integer", nullable=true) 
+     */
     private $currentEntries;
 
     public function getId(): ?int
