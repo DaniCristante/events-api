@@ -17,7 +17,7 @@ class CustomNativeLoader extends NativeLoader
     {
         $generator = FakerGeneratorFactory::create(self::OVERRIDDEN_LOCALE);
         $generator->addProvider(new AliceProvider());
-        $generator->addProvider(new CustomFixtureLoader());
+        $generator->addProvider(new CustomFixtureProvider());
         $generator->seed($this->getSeed());
 
         return $generator;
