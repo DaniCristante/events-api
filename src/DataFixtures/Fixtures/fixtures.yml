@@ -7,11 +7,10 @@ App\Entity\Event:
     city: <city()>
     dateTime: <dateTimeBetween('now', '+1 years')>
 
-# App\Entity\User:
-#   User{1..50}:
-#     name: <firstName()>
-#     surnames: <lastName()>
-#     nickname (unique): <customNickname(<identity($name)>,<identity($surnames)>)>
-#     email (unique): <customEmail(<identity($name)>,<identity($surnames)>)>
-#     password: 'user1234'
-#     phone: <phoneNumber(es_ES)>
+App\Entity\User:
+  User{1..50}:
+    name: <firstName()>
+    surnames: <lastName()>
+    username (unique): <customNickname(<identity($name)>,<identity($surnames)>)>
+    email (unique): <customEmail(<identity($name)>,<identity($surnames)>)>
+    password: 'user1234'
