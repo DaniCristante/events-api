@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -19,34 +21,22 @@ class Event
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    /** @ORM\Column(type="string", length=255) */
     private $title;
 
-    /**
-     * @ORM\Column(type="string", length=300, nullable=true)
-     */
+    /** @ORM\Column(type="string", length=300, nullable=true) */
     private $address;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    /** @ORM\Column(type="string", length=255, nullable=true) */
     private $city;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    /** @ORM\Column(type="datetime", nullable=true) */
     private $datetime;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    /** @ORM\Column(type="integer") */
     private $maxEntries;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    /** @ORM\Column(type="integer", nullable=true) */
     private $currentEntries;
 
     public function getId(): ?int
