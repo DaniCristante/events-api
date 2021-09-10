@@ -1,0 +1,17 @@
+App\Entity\Event:
+  Event{1..50}:
+    title: <sentence(6, true)>
+    maxEntries: <numberBetween(0,50)>
+    currentEntries: <numberBetween(0,50)>
+    address: <streetAddress()>
+    city: <city()>
+    dateTime: <dateTimeBetween('now', '+1 years')>
+
+# App\Entity\User:
+#   User{1..50}:
+#     name: <firstName()>
+#     surnames: <lastName()>
+#     nickname (unique): <customNickname(<identity($name)>,<identity($surnames)>)>
+#     email (unique): <customEmail(<identity($name)>,<identity($surnames)>)>
+#     password: 'user1234'
+#     phone: <phoneNumber(es_ES)>
