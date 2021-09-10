@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -28,13 +28,13 @@ class User
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255, unique=true) 
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $email;
 
     /**
-     * @var String[]
-     * @ORM\Column(type="json") 
+     * @var string[]
+     * @ORM\Column(type="json")
      */
     private $roles = [];
 
@@ -46,7 +46,7 @@ class User
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255, unique=true) 
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
 
@@ -95,9 +95,10 @@ class User
         return (string) $this->username;
     }
 
-    /** 
+    /**
      * @return array<string>
-     * @see UserInterface 
+     *
+     * @see UserInterface
      */
     public function getRoles(): array
     {
@@ -108,9 +109,7 @@ class User
         return array_unique($roles);
     }
 
-    /**
-     * @param array<string> $roles
-     */
+    /** @param array<string> $roles */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
