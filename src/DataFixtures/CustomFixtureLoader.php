@@ -34,7 +34,7 @@ class CustomFixtureLoader
         return $this->stripAccents($name) . $this->stripAccents($surname) . random_int(100, 999);
     }
 
-    private function stripAccents($str)
+    private function stripAccents(string $str): string
     {
         return strtr(utf8_decode($str), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
     }

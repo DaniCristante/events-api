@@ -61,6 +61,7 @@ class Event
     private $currentEntries;
 
     /**
+     * @var User
      * @ManyToOne(targetEntity="User", inversedBy="events")
      * @JoinColumn(name="owner_id", referencedColumnName="id")
      */

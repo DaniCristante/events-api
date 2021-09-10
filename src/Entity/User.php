@@ -17,16 +17,23 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User
 {
     /**
+     * @var int
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
 
-    /** @ORM\Column(type="string", length=255, unique=true) */
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255, unique=true) 
+     */
     private $email;
 
-    /** @ORM\Column(type="json") */
+    /**
+     * @var String[]
+     * @ORM\Column(type="json") 
+     */
     private $roles = [];
 
     /**
@@ -35,16 +42,28 @@ class User
      */
     private $password;
 
-    /** @ORM\Column(type="string", length=255, unique=true) */
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255, unique=true) 
+     */
     private $username;
 
-    /** @ORM\Column(type="string", length=255) */
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
     private $name;
 
-    /** @ORM\Column(type="string", length=255) */
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
     private $surnames;
 
-    /** @OneToMany(targetEntity="Event", mappedBy="owner") */
+    /**
+     * @var Collection<Event>
+     * @OneToMany(targetEntity="Event", mappedBy="owner")
+     */
     private $events;
 
     public function __construct()
@@ -74,7 +93,10 @@ class User
         return (string) $this->username;
     }
 
-    /** @see UserInterface */
+    /** 
+     * @return array<string>
+     * @see UserInterface 
+     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -84,6 +106,9 @@ class User
         return array_unique($roles);
     }
 
+    /**
+     * @param array<string> $roles
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -116,7 +141,7 @@ class User
     }
 
     /** @see UserInterface */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
