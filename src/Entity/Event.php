@@ -25,37 +25,37 @@ class Event
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255) 
+     * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=300, nullable=true) 
+     * @ORM\Column(type="string", length=300, nullable=true)
      */
     private $address;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255, nullable=true) 
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $city;
 
     /**
      * @var DateTimeInterface
-     * @ORM\Column(type="datetime", nullable=true) 
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $datetime;
 
-    /** 
+    /**
      * @var int
-     * @ORM\Column(type="integer") 
+     * @ORM\Column(type="integer")
      */
     private $maxEntries;
 
     /**
      * @var int
-     * @ORM\Column(type="integer", nullable=true) 
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $currentEntries;
 
@@ -100,12 +100,12 @@ class Event
         return $this;
     }
 
-    public function getDatetime(): ?\DateTimeInterface
+    public function getDatetime(): ?DateTimeInterface
     {
         return $this->datetime;
     }
 
-    public function setDatetime(?\DateTimeInterface $datetime): self
+    public function setDatetime(?DateTimeInterface $datetime): self
     {
         $this->datetime = $datetime;
 
