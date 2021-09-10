@@ -11,4 +11,4 @@ ssh:
 	docker exec -ti events-api_php_1 sh
 
 database:
-	docker exec -it symfony-events-api_mysql_1 bash
+	docker exec -it events-api_mysql_1 bash
