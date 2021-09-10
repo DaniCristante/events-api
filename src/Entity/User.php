@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -50,6 +51,11 @@ class User
      * @ORM\Column(type="string", length=255)
      */
     private $surnames;
+
+    /**
+     * @OneToMany(targetEntity="Event", mappedBy="owner")
+     */
+    private $events;
 
     public function __construct()
     {
@@ -161,5 +167,22 @@ class User
         $this->surnames = $surnames;
 
         return $this;
+    }
+
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): void
+    {
+        $this->events->removeElement($event);
     }
 }

@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\EventRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * @ApiResource()
@@ -58,6 +59,12 @@ class Event
      * @ORM\Column(type="integer", nullable=true)
      */
     private $currentEntries;
+
+    /**
+     * @ManyToOne(targetEntity="User", inversedBy="events")
+     * @JoinColumn(name="owner_id", referencedColumnName="id")
+     */
+    private $owner;
 
     public function getId(): ?int
     {
@@ -134,5 +141,17 @@ class Event
         $this->currentEntries = $currentEntries;
 
         return $this;
+    }
+
+    public function setOwner(User $user): self
+    {
+        $this->owner = $user;
+        
+        return $this;
+    }
+
+    public function getOwner(): User
+    {
+        return $this->owner;
     }
 }
