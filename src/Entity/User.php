@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\UserRepository;
@@ -21,14 +23,10 @@ class User
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     */
+    /** @ORM\Column(type="string", length=255, unique=true) */
     private $email;
 
-    /**
-     * @ORM\Column(type="json")
-     */
+    /** @ORM\Column(type="json") */
     private $roles = [];
 
     /**
@@ -37,24 +35,16 @@ class User
      */
     private $password;
 
-    /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     */
+    /** @ORM\Column(type="string", length=255, unique=true) */
     private $username;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    /** @ORM\Column(type="string", length=255) */
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    /** @ORM\Column(type="string", length=255) */
     private $surnames;
 
-    /**
-     * @OneToMany(targetEntity="Event", mappedBy="owner")
-     */
+    /** @OneToMany(targetEntity="Event", mappedBy="owner") */
     private $events;
 
     public function __construct()
@@ -84,9 +74,7 @@ class User
         return (string) $this->username;
     }
 
-    /**
-     * @see UserInterface
-     */
+    /** @see UserInterface */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -103,9 +91,7 @@ class User
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
+    /** @see UserInterface */
     public function getPassword(): string
     {
         return $this->password;
@@ -129,9 +115,7 @@ class User
         return null;
     }
 
-    /**
-     * @see UserInterface
-     */
+    /** @see UserInterface */
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here

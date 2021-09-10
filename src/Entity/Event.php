@@ -146,7 +146,7 @@ class Event
     public function setOwner(User $user): self
     {
         $this->owner = $user;
-        
+
         return $this;
     }
 
