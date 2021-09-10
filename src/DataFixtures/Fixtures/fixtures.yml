@@ -6,6 +6,7 @@ App\Entity\Event:
     address: <streetAddress()>
     city: <city()>
     dateTime: <dateTimeBetween('now', '+1 years')>
+    owner: '@User*'
 
 App\Entity\User:
   User{1..50}:
