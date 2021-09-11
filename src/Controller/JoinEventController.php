@@ -7,18 +7,13 @@ namespace App\Controller;
 use App\Service\JoinEventService;
 use App\Service\JsonResponseService;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 class JoinEventController
 {
-    /**
-     * @var JoinEventService
-     */
+    /** @var JoinEventService */
     private $service;
 
-    /**
-     * @var JsonResponseService
-     */
+    /** @var JsonResponseService */
     private $jsonResponseService;
 
     public function __construct(
@@ -36,6 +31,7 @@ class JoinEventController
         if (!$success) {
             return $this->jsonResponseService->error();
         }
+
         return $this->jsonResponseService->success();
     }
 
@@ -46,6 +42,7 @@ class JoinEventController
         if (!$success) {
             return $this->jsonResponseService->error();
         }
+
         return $this->jsonResponseService->success();
     }
 }

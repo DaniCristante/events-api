@@ -70,7 +70,7 @@ class User
 
     /**
      * @var Collection<Event>
-     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="participants") 
+     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="participants")
      */
     private $eventsParticipatingIn;
 

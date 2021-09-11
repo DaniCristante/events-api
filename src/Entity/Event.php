@@ -72,7 +72,7 @@ class Event
 
     /**
      * @var Collection<User>
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="eventsParticipatingIn") 
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="eventsParticipatingIn")
      */
     private $participants;
 
@@ -191,7 +191,7 @@ class Event
     public function removeParticipant(User $participant): self
     {
         $this->participants->removeElement($participant);
-        $this->currentEntries -= 1;
+        --$this->currentEntries;
 
         return $this;
     }
