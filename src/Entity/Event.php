@@ -14,7 +14,10 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      itemOperations={"delete", "get", "put"},
+ *      collectionOperations={"get", "post"}
+ * )
  * @ORM\Entity(repositoryClass=EventRepository::class)
  */
 class Event

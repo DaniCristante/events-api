@@ -11,9 +11,15 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      itemOperations={"delete", "get", "put"},
+ *      collectionOperations={"get", "post"},
+ *      normalizationContext={"groups"={"user:read"}},
+ *      denormalizationContext={"groups"={"user:write"}}
+ * )
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class User
@@ -28,6 +34,7 @@ class User
 
     /**
      * @var string
+     * @Groups("user:read")
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $email;
@@ -41,35 +48,41 @@ class User
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups("user:write")
      */
     private $password;
 
     /**
      * @var string
+     * @Groups("user:read")
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
 
     /**
      * @var string
+     * @Groups("user:read", "user:write")
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
      * @var string
+     * @Groups("user:read", "user:write")
      * @ORM\Column(type="string", length=255)
      */
     private $surnames;
 
     /**
      * @var Collection<Event>
+     * @Groups("user:read")
      * @OneToMany(targetEntity="Event", mappedBy="owner")
      */
     private $owningEvents;
 
     /**
      * @var Collection<Event>
+     * @Groups("user:read")
      * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="participants")
      */
     private $eventsParticipatingIn;
