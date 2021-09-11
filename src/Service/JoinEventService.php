@@ -29,10 +29,13 @@ class JoinEventService
         $this->entityManager = $entityManager;
     }
 
+    // TODO: Improve return so user can differenciate between errors (event full, bad request...)
     public function joinEvent(int $eventId, int $userId): bool
     {
         $event = $this->eventRepository->findEvent($eventId);
         if (null === $event) {
+            return false;
+        } elseif ($event->getCurrentEntries() >= $event->getMaxEntries()){
             return false;
         }
 
@@ -45,6 +48,7 @@ class JoinEventService
         return true;
     }
 
+    // TODO: verify that owner can't leave.
     public function leaveEvent(int $eventId, int $userId): bool
     {
         $event = $this->eventRepository->findEvent($eventId);
