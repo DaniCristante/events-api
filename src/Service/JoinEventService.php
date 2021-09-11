@@ -35,7 +35,7 @@ class JoinEventService
         $event = $this->eventRepository->findEvent($eventId);
         if (null === $event) {
             return false;
-        } elseif ($event->getCurrentEntries() >= $event->getMaxEntries()){
+        } elseif ($event->getCurrentEntries() >= $event->getMaxEntries()) {
             return false;
         }
 
@@ -53,7 +53,7 @@ class JoinEventService
     {
         $event = $this->eventRepository->findEvent($eventId);
 
-        if (is_null($event)) {
+        if (null === $event) {
             return false;
         }
 
