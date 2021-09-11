@@ -1,6 +1,5 @@
 parameters:
-  userhash: $2a$04$WTxSME/qf/SX8Xyc/9gQreB8iFWorqeG7yNDMjBcfwO5gnYJtJ0Mi
-  adminhash: $2a$04$by51d5uXRB6jYGJOgu3NRu50diTXkqmeFBtNp.tv8S44jwLW/9lsq
+  userhash: $argon2id$v=19$m=65536,t=4,p=1$YsoeG13tp0Va0Tsy71xXIA$lfX1Uf73Gsl7khpSJBJ3PGn1vxNdNWzZdwIvoI/VO48
 
 App\Entity\Event:
   Event{1..50}:
