@@ -34,7 +34,7 @@ class User
 
     /**
      * @var string
-     * @Groups("user:read")
+     * @Groups("user:read", "user:write")
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $email;
@@ -54,7 +54,7 @@ class User
 
     /**
      * @var string
-     * @Groups("user:read")
+     * @Groups("user:read", "user:write")
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $username;
