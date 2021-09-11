@@ -15,7 +15,6 @@ class JoinEventController
 
     public function join(string $id)
     {
-        dump($id);
         $success = $this->service->joinEvent($id);
     }
 
