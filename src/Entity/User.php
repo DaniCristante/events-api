@@ -68,9 +68,7 @@ class User
      */
     private $owningEvents;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="participants")
-     */
+    /** @ORM\ManyToMany(targetEntity=Event::class, mappedBy="participants") */
     private $eventsParticipatingIn;
 
     public function __construct()
@@ -202,9 +200,7 @@ class User
         $this->owningEvents->removeElement($event);
     }
 
-    /**
-     * @return Collection|Event[]
-     */
+    /** @return Collection|Event[] */
     public function getEventsParticipatingIn(): Collection
     {
         return $this->eventsParticipatingIn;

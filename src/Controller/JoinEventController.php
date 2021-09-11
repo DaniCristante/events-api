@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Service\JoinEventService;
@@ -20,6 +22,5 @@ class JoinEventController
 
     public function leave(string $id)
     {
-
     }
 }

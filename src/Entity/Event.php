@@ -70,12 +70,11 @@ class Event
      */
     private $owner;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="eventsParticipatingIn")
-     */
+    /** @ORM\ManyToMany(targetEntity="User", inversedBy="eventsParticipatingIn") */
     private $participants;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->currentEntries = 0;
         $this->participants = new ArrayCollection();
     }
@@ -160,7 +159,7 @@ class Event
     public function setOwner(User $user): self
     {
         $this->owner = $user;
-        $this->currentEntries += 1;
+        ++$this->currentEntries;
 
         return $this;
     }
@@ -170,9 +169,7 @@ class Event
         return $this->owner;
     }
 
-    /**
-     * @return Collection|User[]
-     */
+    /** @return Collection|User[] */
     public function getParticipants(): Collection
     {
         return $this->participants;
@@ -182,7 +179,7 @@ class Event
     {
         if (!$this->participants->contains($participant)) {
             $this->participants[] = $participant;
-            $this->currentEntries += 1;
+            ++$this->currentEntries;
         }
 
         return $this;
@@ -191,7 +188,7 @@ class Event
     public function removeParticipant(User $participant): self
     {
         $this->participants->removeElement($participant);
-        $this->currentEntires -= 1;
+        --$this->currentEntires;
 
         return $this;
     }

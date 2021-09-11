@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Repository\EventRepository;
 
 class JoinEventService
 {
-
     private $eventRepository;
 
     public function __construct(EventRepository $eventRepository)
@@ -20,7 +21,7 @@ class JoinEventService
 
         // Need to somehow get the user
         dump($event);
-        if ($event === null) {
+        if (null === $event) {
             return false;
         }
 
