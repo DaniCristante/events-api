@@ -66,11 +66,17 @@ class User
      * @var Collection<Event>
      * @OneToMany(targetEntity="Event", mappedBy="owner")
      */
-    private $events;
+    private $owningEvents;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="participants")
+     */
+    private $eventsParticipatingIn;
 
     public function __construct()
     {
-        $this->events = new ArrayCollection();
+        $this->owningEvents = new ArrayCollection();
+        $this->eventsParticipatingIn = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -179,20 +185,47 @@ class User
         return $this;
     }
 
-    public function getEvents(): Collection
+    public function getOwningEvents(): Collection
     {
-        return $this->events;
+        return $this->owningEvents;
     }
 
-    public function addEvent(Event $event): self
+    public function addOwningEvent(Event $event): self
     {
-        $this->events[] = $event;
+        $this->owningEvents[] = $event;
 
         return $this;
     }
 
-    public function removeEvent(Event $event): void
+    public function removeOwningEvent(Event $event): void
     {
-        $this->events->removeElement($event);
+        $this->owningEvents->removeElement($event);
+    }
+
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEventsParticipatingIn(): Collection
+    {
+        return $this->eventsParticipatingIn;
+    }
+
+    public function addEventsParticipatingIn(Event $event): self
+    {
+        if (!$this->eventsParticipatingIn->contains($event)) {
+            $this->eventsParticipatingIn[] = $event;
+            $event->addParticipant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventsParticipatingIn(Event $event): self
+    {
+        if ($this->eventsParticipatingIn->removeElement($event)) {
+            $event->removeParticipant($this);
+        }
+
+        return $this;
     }
 }

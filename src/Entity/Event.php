@@ -7,6 +7,8 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\EventRepository;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
@@ -63,13 +65,19 @@ class Event
 
     /**
      * @var User
-     * @ManyToOne(targetEntity="User", inversedBy="events")
+     * @ManyToOne(targetEntity="User", inversedBy="owningEvents")
      * @JoinColumn(name="owner_id", referencedColumnName="id")
      */
     private $owner;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="eventsParticipatingIn")
+     */
+    private $participants;
+
     public function __construct() {
         $this->currentEntries = 0;
+        $this->participants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,5 +168,31 @@ class Event
     public function getOwner(): User
     {
         return $this->owner;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
+    }
+
+    public function addParticipant(User $participant): self
+    {
+        if (!$this->participants->contains($participant)) {
+            $this->participants[] = $participant;
+            $this->currentEntries += 1;
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(User $participant): self
+    {
+        $this->participants->removeElement($participant);
+        $this->currentEntires -= 1;
+
+        return $this;
     }
 }

@@ -30,7 +30,7 @@ database-recreate:
 database-diff:
 	$(call docker-ssh,$(CONSOLE) doctrine:migrations:diff)
 
-database-migrate:
+database-migration:
 	$(call docker-ssh,$(CONSOLE) doctrine:migrations:migrate)
 
 database-schema-update:
