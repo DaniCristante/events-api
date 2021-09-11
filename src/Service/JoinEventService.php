@@ -8,6 +8,9 @@ use App\Repository\EventRepository;
 
 class JoinEventService
 {
+    /**
+     * @var EventRepository
+     */
     private $eventRepository;
 
     public function __construct(EventRepository $eventRepository)
@@ -15,7 +18,7 @@ class JoinEventService
         $this->eventRepository = $eventRepository;
     }
 
-    public function joinEvent(string $id): bool
+    public function joinEvent(int $id): bool
     {
         $event = $this->eventRepository->findEvent($id);
 

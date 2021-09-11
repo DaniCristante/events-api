@@ -68,7 +68,10 @@ class User
      */
     private $owningEvents;
 
-    /** @ORM\ManyToMany(targetEntity=Event::class, mappedBy="participants") */
+    /**
+     * @var Collection<Event>
+     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="participants") 
+     */
     private $eventsParticipatingIn;
 
     public function __construct()
