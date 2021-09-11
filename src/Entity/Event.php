@@ -57,7 +57,7 @@ class Event
 
     /**
      * @var int
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      */
     private $currentEntries;
 
@@ -67,6 +67,10 @@ class Event
      * @JoinColumn(name="owner_id", referencedColumnName="id")
      */
     private $owner;
+
+    public function __construct() {
+        $this->currentEntries = 0;
+    }
 
     public function getId(): ?int
     {
@@ -148,6 +152,7 @@ class Event
     public function setOwner(User $user): self
     {
         $this->owner = $user;
+        $this->currentEntries += 1;
 
         return $this;
     }
