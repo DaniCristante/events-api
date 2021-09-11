@@ -1,7 +1,13 @@
+CERTS_DIR = .certs
+MKCERT = mkcert
+
 build:
 	docker-compose build
 
 up:
+	mkdir -p $(CERTS_DIR)
+	$(MKCERT) -install
+	$(MKCERT) -cert-file $(CERTS_DIR)/certificate.pem -key-file $(CERTS_DIR)/certificate-key.pem localhost
 	docker-compose up -d
 
 halt:
