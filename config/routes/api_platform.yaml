@@ -2,3 +2,7 @@ api_platform:
     resource: .
     type: api_platform
     prefix: /api
+
+custom_routes:
+    resource: 'custom/custom_api_platform.yaml'
+    prefix: /api

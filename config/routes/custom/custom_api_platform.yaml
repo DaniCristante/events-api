@@ -1,0 +1,4 @@
+events.api.event.join:
+  path: /event/{id}/join
+  controller: App\Controller\JoinEventController::join
+  methods: [GET, POST]
