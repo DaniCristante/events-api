@@ -29,16 +29,32 @@ class JoinEventService
         $this->entityManager = $entityManager;
     }
 
-    public function joinEvent(int $id): bool
+    public function joinEvent(int $eventId, int $userId): bool
     {
-        $event = $this->eventRepository->findEvent($id);
+        $event = $this->eventRepository->findEvent($eventId);
         if (null === $event) {
             return false;
         }
 
-        // Need to somehow get the user, Finding a random one ATM cuz theres no front app
-        $user = $this->userRepository->findUserById(rand(1, 49));
+        // improvement on finding user by not sending it via url parameter?
+        $user = $this->userRepository->findUserById($userId);
         $event->addParticipant($user);
+        $this->entityManager->persist($event);
+        $this->entityManager->flush();
+
+        return true;
+    }
+
+    public function leaveEvent(int $eventId, int $userId): bool
+    {
+        $event = $this->eventRepository->findEvent($eventId);
+
+        if (is_null($event)) {
+            return false;
+        }
+
+        $user = $this->userRepository->findUserById($userId);
+        $event->removeParticipant($user);
         $this->entityManager->persist($event);
         $this->entityManager->flush();
 

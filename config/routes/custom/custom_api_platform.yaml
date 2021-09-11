@@ -1,4 +1,9 @@
 events.api.event.join:
-  path: /event/{id}/join
+  path: /event/{eventId}/join/{userId}
   controller: App\Controller\JoinEventController::join
-  methods: [GET, POST]
+  methods: [POST]
+
+events.api.event.leave:
+  path: /event/{eventId}/leave/{userId}
+  controller: App\Controller\JoinEventController::leave
+  methods: [POST]
