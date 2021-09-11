@@ -18,3 +18,6 @@ ssh:
 
 database:
 	docker exec -it events-api_mysql_1 bash
+
+nginx:
+	docker exec -it events-api_web_1 bin/bash	
