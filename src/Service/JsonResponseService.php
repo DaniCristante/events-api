@@ -16,10 +16,10 @@ class JsonResponseService
         ], Response::HTTP_OK);
     }
 
-    public function error(): JsonResponse
+    public function error(array $status, $response = Response::HTTP_BAD_REQUEST): JsonResponse
     {
         return new JsonResponse([
-            'status' => 'error',
-        ], Response::HTTP_BAD_REQUEST);
+            $status
+        ], $response);
     }
 }

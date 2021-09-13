@@ -7,6 +7,8 @@ namespace App\Service;
 use App\Repository\EventRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class JoinEventService
 {
@@ -19,24 +21,32 @@ class JoinEventService
     /** @var EntityManagerInterface */
     private $entityManager;
 
+    /** @var JsonResponseService */
+    private $jsonResponseService;
+
     public function __construct(
         EventRepository $eventRepository,
         UserRepository $userRepository,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        JsonResponseService $jsonResponseService
     ) {
         $this->eventRepository = $eventRepository;
         $this->userRepository = $userRepository;
         $this->entityManager = $entityManager;
+        $this->jsonResponseService = $jsonResponseService;
     }
 
-    // TODO: Improve return so user can differenciate between errors (event full, bad request...)
-    public function joinEvent(int $eventId, int $userId): bool
+    public function joinEvent(int $eventId, int $userId): JsonResponse
     {
         $event = $this->eventRepository->findEvent($eventId);
         if (null === $event) {
-            return false;
+            return $this->jsonResponseService->error([
+                'status' => 'not_found'
+            ], Response::HTTP_NOT_FOUND);
         } elseif ($event->getCurrentEntries() >= $event->getMaxEntries()) {
-            return false;
+            return $this->jsonResponseService->error([
+                'status' => 'event_full'
+            ], Response::HTTP_FORBIDDEN);
         }
 
         // improvement on finding user by not sending it via url parameter?
@@ -45,16 +55,18 @@ class JoinEventService
         $this->entityManager->persist($event);
         $this->entityManager->flush();
 
-        return true;
+        return $this->jsonResponseService->success();
     }
 
     // TODO: verify that owner can't leave.
-    public function leaveEvent(int $eventId, int $userId): bool
+    public function leaveEvent(int $eventId, int $userId): JsonResponse
     {
         $event = $this->eventRepository->findEvent($eventId);
 
         if (null === $event) {
-            return false;
+            return $this->jsonResponseService->error([
+                'status' => 'not_found'
+            ], Response::HTTP_NOT_FOUND);
         }
 
         $user = $this->userRepository->findUserById($userId);
@@ -62,6 +74,6 @@ class JoinEventService
         $this->entityManager->persist($event);
         $this->entityManager->flush();
 
-        return true;
+        $this->jsonResponseService->success();
     }
 }

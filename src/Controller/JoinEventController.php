@@ -26,23 +26,15 @@ class JoinEventController
 
     public function join(int $eventId, int $userId): JsonResponse
     {
-        $success = $this->service->joinEvent($eventId, $userId);
+        $response = $this->service->joinEvent($eventId, $userId);
 
-        if (!$success) {
-            return $this->jsonResponseService->error();
-        }
-
-        return $this->jsonResponseService->success();
+        return $response;
     }
 
     public function leave(int $eventId, int $userId): JsonResponse
     {
-        $success = $this->service->leaveEvent($eventId, $userId);
+        $response = $this->service->leaveEvent($eventId, $userId);
 
-        if (!$success) {
-            return $this->jsonResponseService->error();
-        }
-
-        return $this->jsonResponseService->success();
+        return $response;
     }
 }
